@@ -22,8 +22,9 @@ iptables -A INPUT -s 172.20.240.0/23 -j ACCEPT # example how to allow whole IP n
 iptables -A INPUT -s 193.167.100.97 -j ACCEPT # DO NOT COMMENT OR MODIFY THIS. THIS IS BACKDOOR TO YOUR SERVER FROM students.oamk.fi
 
 # Completely open services
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT # DO NOT COMMENT OR MODIFY THIS. YOU WILL KICK YOURSELF OUT FROM THE SERVER (SSH)
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT # DO NOT COMMENT OR MODIFY THIS. YOU WILL KICK YOURSELF OUT FROM THE SERVER
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT # HTTP
+iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT # ICMP ping
 
 # established traffic inbound (allow return traffic back which was originated from your server)
 iptables -A INPUT -p ALL -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
